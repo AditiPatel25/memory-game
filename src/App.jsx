@@ -38,8 +38,6 @@ function App() {
   }
 
   function handleCardClick(name) {
-    console.log('clicked:', name)
-    console.log('has name:', clickedCards.has(name))
     if (clickedCards.has(name)) {
       setClickedCards(new Set());
       setCurrentScore(0);
@@ -69,12 +67,13 @@ function App() {
   return (
     <>
       <nav className='header'>
-        <h1 className='header-text'>Memory Game</h1>
-        <h3>Click every Pokémon once — but watch out, they shuffle after each pick! Repeat a Pokémon and it's game over <Frown size={18} /></h3>
+        <div className='left-header'>
+          <h1 className='header-text'>Memory Game</h1>
+          <h3>Click every Pokémon once — but watch out, they shuffle after each pick! Repeat a Pokémon and it's game over <Frown size={18} /></h3>
+        </div>
         <div className='scoreboard'>
-          <p className='scoreboard-text'>Current Score: {currentScore}</p>
-          <div className='divider'></div>
-          <p className='scoreboard-text'>Best Score <Trophy size={16} /> : {bestScore} </p>
+          <h3 className='scoreboard-text'>Current Score: {currentScore}</h3>
+          <h3 className='scoreboard-text'>Best Score <Trophy size={16} /> : {bestScore} </h3>
         </div>
       </nav>
       <section className='main-section'>
