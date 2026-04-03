@@ -2,7 +2,10 @@
 
 :root {
   --main-orange: #EB4511;
-  --main-yellow: #FFE66D
+  --main-yellow: #FFE66D;
+  --main-blue: #035E7B;
+  --main-red: #49111C;
+  --main-grey: #5D675B;
 }
 
 * {
@@ -47,7 +50,10 @@ h3 {
 
 .main-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 30px 50px;
+  gap: 25px;
+  
 }
 
 .scoreboard {
