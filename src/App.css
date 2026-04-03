@@ -77,3 +77,39 @@ h3 {
 .divider {
   border-left: 4px solid var(--main-yellow);
 }
+
+.popup {
+  background-color: white;
+  padding: 20px 50px;
+  border-radius: 15px;
+  border: 4px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-popup {
+  padding: 10px 15px;
+  margin: 10px 0;
+  background-color: var(--main-orange);
+  border-radius: 15px;
+  border: none;
+  font-family: "Righteous";
+  width: 100%;
+}
+
+

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { Trophy, Frown } from 'lucide-react'
 import Card from './components/Card.jsx'
+import confetti from 'canvas-confetti'
 
 const characters =
   ['Charmander', 'Vulpix', 'Magby', 'Entei',
@@ -14,6 +15,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState(new Set());
+  const [showPopup, setShowPopup] = useState(null);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -35,24 +37,33 @@ function App() {
     setCards(cardsCopy)
   }
 
-  function updateScore(name) {
+  function handleCardClick(name) {
     console.log('clicked:', name)
     console.log('has name:', clickedCards.has(name))
     if (clickedCards.has(name)) {
       setClickedCards(new Set());
       setCurrentScore(0);
+      setShowPopup("lose")
       if (currentScore > bestScore) {
         setBestScore(currentScore)
       }
+
     } else {
       setClickedCards(new Set([...clickedCards, name]))
       setCurrentScore(currentScore + 1)
       if (clickedCards.size + 1 === characters.length) {
-        setBestScore(currentScore + 1)
-        setCurrentScore(0)
+        setShowPopup("win");
+        confetti();
+        setClickedCards(new Set());
+        setBestScore(currentScore + 1);
+        setCurrentScore(0);
       }
-      shuffleCards()
+      shuffleCards();
     }
+  }
+
+  function closePopup() {
+    setShowPopup(null)
   }
 
   return (
@@ -68,9 +79,17 @@ function App() {
       </nav>
       <section className='main-section'>
         {cards.map(character => (
-          <Card key={character.name} character={character} updateScore={updateScore} />
+          <Card key={character.name} character={character} handleCardClick={handleCardClick} />
         ))}
       </section>
+      {showPopup &&
+        <div className='overlay'>
+          <div className='popup'>
+            <h2>{showPopup === 'win' ? 'You won! 🎉' : 'Oh no! You lost 😔'}</h2>
+            <p>{showPopup === 'win' ? 'You caught them all!' : 'Better luck next time!'}</p>
+            <button className='close-popup' onClick={closePopup}>Close</button>
+          </div>
+        </div>}
     </>
   )
 }
